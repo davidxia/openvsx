@@ -21,6 +21,8 @@ WORKDIR /home/openvsx/server
 # Copy and unpack the server archive
 COPY --chown=openvsx:openvsx --from=builder /home/gradle/build/libs/openvsx-server.jar /home/openvsx/
 RUN jar -xf /home/openvsx/openvsx-server.jar && rm /home/openvsx/openvsx-server.jar
+COPY --chown=openvsx:openvsx scripts/generate-properties.sh ./
+RUN chmod u+x generate-properties.sh
 
 # Copy the start script and make it executable
 COPY --chown=openvsx:openvsx scripts/run-server.sh ./
